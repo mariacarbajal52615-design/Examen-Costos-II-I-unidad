@@ -1,0 +1,560 @@
+<lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen: Costos Empresariales II - Unidad I (ITSON)</title>
+  <style>
+    :root {
+      --primary: #004c97; /* Azul institucional ITSON */
+      --secondary: #0072ce;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #2d3748;
+      --border: #e2e8f0;
+      --success: #28a745;
+      --danger: #dc3545;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: var(--card);
+      padding: 35px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    header {
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .logo-container {
+      margin-bottom: 15px;
+    }
+    .logo-itson {
+      max-width: 260px;
+      height: auto;
+      display: inline-block;
+    }
+    h1 {
+      color: var(--primary);
+      margin: 10px 0 5px 0;
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin: 0 0 8px 0;
+    }
+    .badge-info {
+      display: inline-block;
+      background: #e2e8f0;
+      color: #2d3748;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .student-info {
+      background: #ebf4ff;
+      border-left: 5px solid var(--primary);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+    }
+    .student-info h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.15rem;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+    .section-title {
+      background: var(--primary);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 30px;
+      font-size: 1.15rem;
+    }
+    .question-block {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-top: 20px;
+      background: #fafbfc;
+    }
+    .question-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .options label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #edf2f7;
+    }
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 30px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #003366;
+    }
+    #result-box {
+      display: none;
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 25px;
+      text-align: center;
+    }
+    .already-submitted {
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 25px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .score-circle {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo-container">
+      <!-- Asegúrate de subir la imagen como itson-logo.png en la misma carpeta del repositorio -->
+      <img src="itson-logo.png" alt="ITSON Universidad" class="logo-itson">
+    </div>
+    <h1>Costos Empresariales II</h1>
+    <h2>Unidad de Competencia I: Planeación y Modelo Costo-Volumen-Utilidad (CVU)</h2>
+    <span class="badge-info">Evaluación Sumativa: 100 Puntos Máximos</span>
+  </header>
+
+  <!-- Mensaje bloqueador si ya lo realizó -->
+  <div id="already-done-msg" class="already-submitted" style="display: none;">
+    <h3>⚠️ Examen ya presentado</h3>
+    <p>Este examen solo puede responderse una única vez por estudiante desde este equipo/navegador.</p>
+    <div id="previous-score" class="score-circle"></div>
+    <p id="previous-details" style="font-weight: 500;"></p>
+  </div>
+
+  <form id="examForm">
+    <!-- Datos del Alumno -->
+    <div class="student-info">
+      <h3>Datos de Identificación del Alumno</h3>
+      <div class="form-group">
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre completo con apellidos">
+      </div>
+      <div class="form-group">
+        <label for="matricula">ID / Matrícula (ITSON):</label>
+        <input type="text" id="matricula" name="matricula" required placeholder="Ej. 00000213456">
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: 20 REACTIVOS (60 PTS) -->
+    <div class="section-title">Sección I: Reactivos Teóricos y Conceptuales (60 puntos - 3 pts c/u)</div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">1. ¿Cuáles son los tres elementos tradicionales del costo de producción?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a" required> a) Materia prima indirecta, mano de obra directa y gastos de administración.</label>
+        <label><input type="radio" name="q1" value="b"> b) Materia prima directa, mano de obra directa y costos indirectos de fabricación.</label>
+        <label><input type="radio" name="q1" value="c"> c) Costos fijos, costos variables y costos semivariables.</label>
+        <label><input type="radio" name="q1" value="d"> d) Gastos de venta, gastos de administración y gastos financieros.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">2. La depreciación de maquinaria, suministros y energía eléctrica fabril se clasifican como:</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a" required> a) Mano de Obra Directa (MOD).</label>
+        <label><input type="radio" name="q2" value="b"> b) Gastos del Periodo.</label>
+        <label><input type="radio" name="q2" value="c"> c) Costos Indirectos de Fabricación (CIF).</label>
+        <label><input type="radio" name="q2" value="d"> d) Materia Prima Directa (MPD).</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="a">
+      <div class="question-title">3. Según la clasificación por la función en que se incurren, los intereses bancarios son costos:</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a" required> a) Financieros.</label>
+        <label><input type="radio" name="q3" value="b"> b) De distribución.</label>
+        <label><input type="radio" name="q3" value="c"> c) De producción.</label>
+        <label><input type="radio" name="q3" value="d"> d) De administración.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="d">
+      <div class="question-title">4. Los costos que se capitalizan en inventarios hasta el momento de su venta son costos:</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a" required> a) Del periodo.</label>
+        <label><input type="radio" name="q4" value="b"> b) Históricos.</label>
+        <label><input type="radio" name="q4" value="c"> c) Predeterminados.</label>
+        <label><input type="radio" name="q4" value="d"> d) Del producto.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">5. ¿Cuál de las siguientes afirmaciones describe a los costos fijos?</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a" required> a) Varían en proporción directa al volumen de producción.</label>
+        <label><input type="radio" name="q5" value="b"> b) Tienen un comportamiento mixto según las horas de trabajo.</label>
+        <label><input type="radio" name="q5" value="c"> c) Permanecen constantes en su monto total dentro del rango relevante.</label>
+        <label><input type="radio" name="q5" value="d"> d) Se eliminan por completo al suspender actividades en fin de semana.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">6. En la ecuación de costo semivariable Y = a + bx, la letra "b" representa:</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="a" required> a) El costo total proyectado.</label>
+        <label><input type="radio" name="q6" value="b"> b) El costo fijo total del periodo.</label>
+        <label><input type="radio" name="q6" value="c"> c) La tasa de costo variable unitario.</label>
+        <label><input type="radio" name="q6" value="d"> d) El nivel de actividad o cost driver.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">7. El método de segmentación que minimiza la suma de desviaciones cuadráticas entre datos reales y estimados es:</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="a" required> a) Diagrama de Dispersión.</label>
+        <label><input type="radio" name="q7" value="b"> b) Mínimos Cuadrados (Regresión Lineal Simple).</label>
+        <label><input type="radio" name="q7" value="c"> c) Punto Alto - Punto Bajo.</label>
+        <label><input type="radio" name="q7" value="d"> d) Estimación Directa.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">8. En el método de Punto Alto - Punto Bajo, la tasa variable "b" se obtiene mediante:</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="a" required> a) Costo máximo entre actividad máxima.</label>
+        <label><input type="radio" name="q8" value="b"> b) Diferencia de costos extremos dividida entre la diferencia de niveles de actividad extremos.</label>
+        <label><input type="radio" name="q8" value="c"> c) Promedio simple de costos entre promedio simple de horas.</label>
+        <label><input type="radio" name="q8" value="d"> d) Sumatoria de errores al cuadrado entre n.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">9. ¿Cómo se define el punto de equilibrio en el modelo CVU?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="a" required> a) Nivel donde el margen de contribución es cero.</label>
+        <label><input type="radio" name="q9" value="b"> b) Volumen de operaciones donde los ingresos totales igualan los costos totales, sin utilidad ni pérdida.</label>
+        <label><input type="radio" name="q9" value="c"> c) Volumen donde las ventas cubren exactamente la carga fiscal.</label>
+        <label><input type="radio" name="q9" value="d"> d) Inventario mínimo de seguridad.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="a">
+      <div class="question-title">10. La fórmula del Margen de Contribución Unitario (MCU) es:</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="a" required> a) Precio de Venta - Costo Variable Unitario</label>
+        <label><input type="radio" name="q10" value="b"> b) Costos Fijos Totales / Precio de Venta</label>
+        <label><input type="radio" name="q10" value="c"> c) Precio de Venta - Costos Fijos Totales</label>
+        <label><input type="radio" name="q10" value="d"> d) Costo Variable Unitario / Precio de Venta</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">11. Si una empresa tiene Precio de $100 y Costo Variable Unitario de $60, su % de margen de contribución (%MC) es:</div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="a" required> a) 60%</label>
+        <label><input type="radio" name="q11" value="b"> b) 25%</label>
+        <label><input type="radio" name="q11" value="c"> c) 40%</label>
+        <label><input type="radio" name="q11" value="d"> d) 166%</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">12. Para calcular el punto de equilibrio en importe monetario ($), la fórmula es:</div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="a" required> a) Costos Fijos × MCU</label>
+        <label><input type="radio" name="q12" value="b"> b) Costos Fijos / %MC</label>
+        <label><input type="radio" name="q12" value="c"> c) Costos Variables Totales / MCU</label>
+        <label><input type="radio" name="q12" value="d"> d) Utilidad Deseada / Precio de Venta</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">13. Para obtener una Utilidad de Operación deseada (UD), el volumen requerido en unidades es:</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="a" required> a) Q = (CF - UD) / MCU</label>
+        <label><input type="radio" name="q13" value="b"> b) Q = (CF + UD) / Precio</label>
+        <label><input type="radio" name="q13" value="c"> c) Q = (CF + UD) / MCU</label>
+        <label><input type="radio" name="q13" value="d"> d) Q = CF / (MCU + UD)</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="a">
+      <div class="question-title">14. En regresión lineal simple, ¿cuál es la fórmula para determinar el costo fijo "a"?</div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="a" required> a) a = [ ∑ y - b(∑ x) ] / n</label>
+        <label><input type="radio" name="q14" value="b"> b) a = [ ∑ x - b(∑ y) ] / n</label>
+        <label><input type="radio" name="q14" value="c"> c) a = [ n(∑ xy) ] / ∑ x²</label>
+        <label><input type="radio" name="q14" value="d"> d) a = ∑ y - b</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">15. En un entorno multiproducto, ¿qué indicador se utiliza en el denominador para calcular el punto de equilibrio total?</div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="a" required> a) El margen de contribución unitario de la línea líder.</label>
+        <label><input type="radio" name="q15" value="b"> b) El costo variable promedio ponderado.</label>
+        <label><input type="radio" name="q15" value="c"> c) El Margen de Contribución Unitario Ponderado (MCUP).</label>
+        <label><input type="radio" name="q15" value="d"> d) El costo fijo total prorrateado.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="a">
+      <div class="question-title">16. La ponderación del margen de cada producto en un modelo de mezcla de ventas depende de:</div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="a" required> a) El porcentaje de participación de cada producto en la mezcla de ventas (%wi).</label>
+        <label><input type="radio" name="q16" value="b"> b) Los costos de mano de obra directa aplicados a cada producto.</label>
+        <label><input type="radio" name="q16" value="c"> c) El stock mínimo establecido en almacén.</label>
+        <label><input type="radio" name="q16" value="d"> d) El precio relativo frente a la competencia.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="a">
+      <div class="question-title">17. (V/F) La automatización y la tecnología suelen disminuir los costos variables unitarios e incrementar los costos fijos.</div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="a" required> a) Verdadero</label>
+        <label><input type="radio" name="q17" value="b"> b) Falso</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">18. ¿Cuál es el efecto de un alto apalancamiento operativo una vez superado el punto de equilibrio?</div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="a" required> a) Disminuye el ritmo de crecimiento de las utilidades.</label>
+        <label><input type="radio" name="q18" value="b"> b) Las utilidades crecen a una tasa sustancialmente mayor por cada unidad adicional vendida.</label>
+        <label><input type="radio" name="q18" value="c"> c) Los costos fijos se convierten en costos del producto.</label>
+        <label><input type="radio" name="q18" value="d"> d) Elimina la necesidad de calcular margen de contribución.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="b">
+      <div class="question-title">19. Con Costos Fijos de $1,000,000 y un MCUP de $50, ¿cuál es el volumen total de equilibrio?</div>
+      <div class="options">
+        <label><input type="radio" name="q19" value="a" required> a) 50,000 unidades.</label>
+        <label><input type="radio" name="q19" value="b"> b) 20,000 unidades.</label>
+        <label><input type="radio" name="q19" value="c"> c) 10,000 unidades.</label>
+        <label><input type="radio" name="q19" value="d"> d) 25,000 unidades.</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-correct="c">
+      <div class="question-title">20. Los costos determinados antes del periodo fabril mediante estimaciones o estándares se denominan:</div>
+      <div class="options">
+        <label><input type="radio" name="q20" value="a" required> a) Históricos.</label>
+        <label><input type="radio" name="q20" value="b"> b) Indirectos.</label>
+        <label><input type="radio" name="q20" value="c"> c) Predeterminados.</label>
+        <label><input type="radio" name="q20" value="d"> d) Semivariables.</label>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: EJERCICIO PRÁCTICO (40 PTS) -->
+    <div class="section-title">Sección II: Ejercicio Práctico - Mínimos Cuadrados (40 puntos - 10 pts c/u)</div>
+    
+    <div class="question-block">
+      <p><strong>Planteamiento:</strong> Una planta recopiló las horas de mantenimiento (x) y el costo total en MXN (y) de un semestre (n = 6):</p>
+      <table>
+        <tr><th>Mes</th><th>Horas (x)</th><th>Costo Total (y)</th></tr>
+        <tr><td>1</td><td>400</td><td>$18,000</td></tr>
+        <tr><td>2</td><td>500</td><td>$20,500</td></tr>
+        <tr><td>3</td><td>450</td><td>$19,000</td></tr>
+        <tr><td>4</td><td>600</td><td>$23,500</td></tr>
+        <tr><td>5</td><td>550</td><td>$22,000</td></tr>
+        <tr><td>6</td><td>700</td><td>$26,000</td></tr>
+      </table>
+      <p><small><em>Datos calculados de apoyo:</em> ∑x = 3,200 | ∑y = 129,000 | ∑x² = 1,765,000 | ∑xy = 70,400,000 | (∑x)² = 10,240,000</small></p>
+
+      <div class="form-group">
+        <label>1. Tasa de costo variable por hora (b) en MXN (redondea a 2 decimales, ej. 27.43): [10 pts]</label>
+        <input type="number" step="0.01" id="ex_b" name="ex_b" required placeholder="27.43">
+      </div>
+
+      <div class="form-group">
+        <label>2. Costo fijo total del periodo (a) en MXN (redondea a 2 decimales, ej. 6871.43): [10 pts]</label>
+        <input type="number" step="0.01" id="ex_a" name="ex_a" required placeholder="6871.43">
+      </div>
+
+      <div class="form-group">
+        <label>3. Proyección del costo total (Y) para 650 horas en MXN (redondea a 2 decimales, ej. 24700.02): [10 pts]</label>
+        <input type="number" step="0.01" id="ex_proj" name="ex_proj" required placeholder="24700.02">
+      </div>
+
+      <div class="form-group">
+        <label>4. Si en un mes se trabajan 0 horas, ¿cuál sería el costo total proyectado en MXN? [10 pts]</label>
+        <input type="number" step="0.01" id="ex_zero" name="ex_zero" required placeholder="6871.43">
+      </div>
+    </div>
+
+    <button type="submit" id="submitBtn" class="btn-submit">Enviar Examen y Ver Calificación</button>
+  </form>
+
+  <div id="result-box">
+    <h2>Resultado de la Evaluación</h2>
+    <div id="score-display" class="score-circle"></div>
+    <p id="score-feedback" style="font-size: 1.15rem; font-weight: 500;"></p>
+    <p><small>Tus respuestas y calificación han sido enviadas al profesor.</small></p>
+  </div>
+</div>
+
+<script>
+  // CONFIGURACIÓN DE CORREO:
+  // Regístrate en https://formspree.io (gratis) y reemplaza 'TU_FORM_ID_AQUI' con el código de tu formulario:
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/TU_FORM_ID_AQUI"; 
+
+  const EXAM_STORAGE_KEY = "itson_examen_cvu_v1";
+
+  // Verificar si ya fue resuelto previamente en este equipo/navegador
+  window.addEventListener("DOMContentLoaded", () => {
+    const saved = localStorage.getItem(EXAM_STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      document.getElementById("examForm").style.display = "none";
+      document.getElementById("already-done-msg").style.display = "block";
+      document.getElementById("previous-score").innerText = `${data.score} / 100`;
+      document.getElementById("previous-details").innerText = `Alumno: ${data.nombre} | ID: ${data.matricula} — Fecha: ${data.fecha}`;
+    }
+  });
+
+  document.getElementById("examForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Evaluando y enviando resultados...";
+
+    // 1. Evaluar Reactivos Teóricos (20 reactivos x 3 pts = 60 pts)
+    let scoreTeoria = 0;
+    const questions = document.querySelectorAll(".question-block[data-correct]");
+    questions.forEach((q, idx) => {
+      const qNum = idx + 1;
+      const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+      if (selected && selected.value === q.dataset.correct) {
+        scoreTeoria += 3;
+      }
+    });
+
+    // 2. Evaluar Ejercicio Práctico (4 respuestas x 10 pts = 40 pts)
+    let scorePractico = 0;
+    const ansB = parseFloat(document.getElementById("ex_b").value);
+    const ansA = parseFloat(document.getElementById("ex_a").value);
+    const ansProj = parseFloat(document.getElementById("ex_proj").value);
+    const ansZero = parseFloat(document.getElementById("ex_zero").value);
+
+    // Margen de tolerancia para variaciones mínimas de redondeo
+    if (!isNaN(ansB) && Math.abs(ansB - 27.43) <= 0.2) scorePractico += 10;
+    if (!isNaN(ansA) && Math.abs(ansA - 6871.43) <= 2.0) scorePractico += 10;
+    if (!isNaN(ansProj) && Math.abs(ansProj - 24700.02) <= 5.0) scorePractico += 10;
+    if (!isNaN(ansZero) && Math.abs(ansZero - 6871.43) <= 2.0) scorePractico += 10;
+
+    const totalScore = Math.round(scoreTeoria + scorePractico);
+
+    // Payload que recibirás en tu correo
+    const payload = {
+      institucion: "ITSON",
+      asignatura: "Costos Empresariales II",
+      nombre_alumno: document.getElementById("nombre").value,
+      id_alumno: document.getElementById("matricula").value,
+      calificacion_final: `${totalScore} / 100`,
+      desglose_teoria: `${scoreTeoria} / 60`,
+      desglose_practica: `${scorePractico} / 40`,
+      fecha_aplicacion: new Date().toLocaleString("es-MX", { timeZone: "America/Hermosillo" })
+    };
+
+    // Enviar resultados al correo mediante Formspree
+    try {
+      if (!FORMSPREE_ENDPOINT.includes("TU_FORM_ID_AQUI")) {
+        await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      }
+    } catch (err) {
+      console.warn("No se pudo conectar al endpoint de correo:", err);
+    }
+
+    // Registrar en localStorage para evitar intentos múltiples
+    localStorage.setItem(EXAM_STORAGE_KEY, JSON.stringify({
+      score: totalScore,
+      nombre: payload.nombre_alumno,
+      matricula: payload.id_alumno,
+      fecha: payload.fecha_aplicacion
+    }));
+
+    // Mostrar calificación final en pantalla
+    document.getElementById("examForm").style.display = "none";
+    const resBox = document.getElementById("result-box");
+    resBox.style.display = "block";
+    resBox.style.background = totalScore >= 70 ? "#e6fffa" : "#fff5f5";
+    resBox.style.border = `1px solid ${totalScore >= 70 ? "#38b2ac" : "#feb2b2"}`;
+
+    document.getElementById("score-display").innerText = `${totalScore} / 100`;
+    document.getElementById("score-feedback").innerText = totalScore >= 70 
+      ? `¡Felicidades, ${payload.nombre_alumno}! Has aprobado la evaluación.`
+      : `Hola ${payload.nombre_alumno}, tu calificación no alcanza el mínimo aprobatorio requerido.`;
+  });
+</script>
+
+</body>
+</html>
